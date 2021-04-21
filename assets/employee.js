@@ -24,3 +24,6 @@ class Employee {
 
     }
 }
+
+//export the class Employee for use elsewhere in our programs.
+module.exports = Employee;
