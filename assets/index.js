@@ -47,7 +47,7 @@ function employeeManager() {
         choices: [
           "Engineer",
           "Intern",
-          "No more team members"
+          "None"
         ],
       }
     ])
@@ -62,6 +62,9 @@ function employeeManager() {
           break;
         case "Intern":
           employeeIntern();
+          break;
+        case "None":
+          noMoreEmployees();
           break;
         default:
           noMoreEmployees();
@@ -95,11 +98,35 @@ function employeeEngineer() {
         type: "input",
         name: "engineerGitHub",
         message: "Please enter Engineer's Github username.",
+      },
+      {
+        type: "list",
+        name: "employeeRole",
+        message: "What is the role of this team member?",
+        choices: [
+          "Engineer",
+          "Intern",
+          "None"
+        ],
       }
     ])
     .then((data) => {
       //create a new Engineer instance with the question's answers.
       let engineerData = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGitHub);
+
+      switch (data.employeeRole) {
+        case "Engineer":
+          employeeEngineer();
+          break;
+        case "Intern":
+          employeeIntern();
+          break;
+        case "None":
+          noMoreEmployees();
+          break;
+        default:
+          noMoreEmployees();
+      }
 
       //save the newly created manager into the allEmployees array.
       allEmployees.push(engineerData);
@@ -128,11 +155,35 @@ function employeeIntern() {
         type: "input",
         name: "internSchool",
         message: "Please enter intern's school username.",
+      },
+      {
+        type: "list",
+        name: "employeeRole",
+        message: "What is the role of this team member?",
+        choices: [
+          "Engineer",
+          "Intern",
+          "None"
+        ],
       }
     ])
     .then((data) => {
       //create a new intern instance with the question's answers.
-      let internData = new intern(data.internName, data.internID, data.internEmail, data.internSchool);
+      let internData = new Intern(data.internName, data.internID, data.internEmail, data.internSchool);
+
+      switch (data.employeeRole) {
+        case "Engineer":
+          employeeEngineer();
+          break;
+        case "Intern":
+          employeeIntern();
+          break;
+        case "None":
+          noMoreEmployees();
+          break;
+        default:
+          noMoreEmployees();
+      }
 
       //save the newly created manager into the allEmployees array.
       allEmployees.push(internData);

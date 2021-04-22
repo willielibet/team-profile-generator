@@ -9,9 +9,13 @@ class Intern extends Employee {
     //this constructor will be called when creating an intern
     //instance.
     constructor(id, name, email, school){
-        this.school = school;
         //to access the superclass (Employee) constructor and methods.
+        //Must call super constructor in derived class before accessing 
+        //'this' or returning from derived constructor at new Manager to avoid
+        //the error: ReferecenError.
         super(id, name, email);
+        this.school = school;
+        
     }
 
     //only the get methods for Intern and school are needed since
