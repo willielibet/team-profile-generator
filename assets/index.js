@@ -10,7 +10,8 @@ const path = require("path");
 //"TypeError: Manager is not a constructor", import classes
 const Manager = require("./manager");
 const Employee = require("./employee");
-const Engineer = require("./engineer");;
+const Engineer = require("./engineer");
+const Intern = require("./intern");
 
 //declare empty array to store all employees
 let allEmployees = [];
@@ -63,6 +64,7 @@ function employeeManager() {
           employeeIntern();
           break;
         default:
+          noMoreEmployees();
       }
 
       //save the newly created manager into the allEmployees array.
@@ -104,10 +106,44 @@ function employeeEngineer() {
     });
 }
 
-employeeManager();
+function employeeIntern() {
+  //questions for engineer name, manager id, email, and office number
+  inquirer.prompt([
+      {
+        type: "input",
+        name: "internName",
+        message: "Please enter intern's name."
+      },
+      {
+        type: "input",
+        name: "internID",
+        message: "Please enter intern's ID."
+      },
+      {
+        type: "input",
+        name: "internEmail",
+        message: "Please enter intern's email.",
+      },
+      {
+        type: "input",
+        name: "internSchool",
+        message: "Please enter intern's school username.",
+      }
+    ])
+    .then((data) => {
+      //create a new intern instance with the question's answers.
+      let internData = new intern(data.internName, data.internID, data.internEmail, data.internSchool);
+
+      //save the newly created manager into the allEmployees array.
+      allEmployees.push(internData);
+    });
 
 }
 
-
+function noMoreEmployees() {
+  return true;
+}
+employeeManager();
+}
 
 myTeam();
