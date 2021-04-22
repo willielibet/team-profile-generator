@@ -9,9 +9,13 @@ class Engineer extends Employee {
     //this constructor will be called when creating an engineer
     //instance.
     constructor(id, name, email, github){
-        this.github = github;
-        //to access the superclass (Employee) constructor and methods.
+        //to access the superclass (Employee) constructor and methods, use super().
+        //Must call super constructor in derived class before accessing 
+        //'this' or returning from derived constructor at new Manager to avoid
+        //the error: ReferecenError.
         super(id, name, email);
+        this.github = github;
+        
     }
 
     //only the get methods for Engineer and github are needed since

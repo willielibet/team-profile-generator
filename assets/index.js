@@ -10,10 +10,12 @@ const path = require("path");
 //"TypeError: Manager is not a constructor", import classes
 const Manager = require("./manager");
 const Employee = require("./employee");
+const Engineer = require("./engineer");;
 
-//declare empty array to hold all employees
+//declare empty array to store all employees
 let allEmployees = [];
 
+function myTeam() {
 function employeeManager() {
   //questions for manager name, manager id, email, and office number
   inquirer.prompt([
@@ -36,15 +38,76 @@ function employeeManager() {
         type: "input",
         name: "managerOfficeNumber",
         message: "Please enter manager's office number."
+      },
+      {
+        type: "list",
+        name: "employeeRole",
+        message: "What is the role of this team member?",
+        choices: [
+          "Engineer",
+          "Intern",
+          "No more team members"
+        ],
       }
     ])
     .then((data) => {
       //console.log(data);
-      // create a new Manager instance with the question's answers.
+      //create a new Manager instance with the question's answers.
       let managerData = new Manager(data.managerName, data.managerID, data.managerEmail, data.managerOfficeName);
+
+      switch (data.employeeRole) {
+        case "Engineer":
+          employeeEngineer();
+          break;
+        case "Intern":
+          employeeIntern();
+          break;
+        default:
+      }
+
       //save the newly created manager into the allEmployees array.
       allEmployees.push(managerData);
     });
 }
 
+
+function employeeEngineer() {
+  //questions for engineer name, manager id, email, and office number
+  inquirer.prompt([
+      {
+        type: "input",
+        name: "engineerName",
+        message: "Please enter Engineer's name."
+      },
+      {
+        type: "input",
+        name: "engineerID",
+        message: "Please enter Engineer's ID."
+      },
+      {
+        type: "input",
+        name: "engineerEmail",
+        message: "Please enter Engineer's email.",
+      },
+      {
+        type: "input",
+        name: "engineerGitHub",
+        message: "Please enter Engineer's Github username.",
+      }
+    ])
+    .then((data) => {
+      //create a new Engineer instance with the question's answers.
+      let engineerData = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGitHub);
+
+      //save the newly created manager into the allEmployees array.
+      allEmployees.push(engineerData);
+    });
+}
+
 employeeManager();
+
+}
+
+
+
+myTeam();
