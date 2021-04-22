@@ -27,3 +27,6 @@ class Manager extends Employee {
         return this.officeNumber;
     }
 }
+
+//export the class Manager for use elsewhere in our programs.
+module.exports = Manager;

@@ -27,3 +27,6 @@ class Intern extends Employee {
         return this.school;
     }
 }
+
+//export the class Intern for use elsewhere in our programs.
+module.exports = Intern;
