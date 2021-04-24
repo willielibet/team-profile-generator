@@ -15,7 +15,6 @@ class Engineer extends Employee {
         //the error: ReferecenError.
         super(id, name, email);
         this.github = github;
-        
     }
 
     //only the get methods for Engineer and github are needed since
@@ -24,7 +23,6 @@ class Engineer extends Employee {
     //get methods to access instance the string Engineer and github.
     getRole() {
         return "Engineer";
-
     }
     
     getGithub(){

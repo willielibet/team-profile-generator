@@ -8,12 +8,12 @@ class Manager extends Employee {
     //intern constructor with the features an intern needs.
     //this constructor will be called when creating an engineer
     //instance.
-    constructor(id, name, email, officeNumber){
+    constructor(name, id, email, officeNumber){
         //to access the superclass (Employee) constructor and methods, use super().
         //Must call super constructor in derived class before accessing 
         //'this' or returning from derived constructor at new Manager to avoid
         //the error: ReferecenError.
-        super(id, name, email);
+        super(name, id, email);
         this.officeNumber = officeNumber;
     }
 

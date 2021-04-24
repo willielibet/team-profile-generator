@@ -8,193 +8,154 @@ const path = require("path");
 
 //to avoid errors such as "Manager is not defined" and
 //"TypeError: Manager is not a constructor", import classes
-const Manager = require("./manager");
-const Employee = require("./employee");
-const Engineer = require("./engineer");
-const Intern = require("./intern");
+const Manager = require("./assets/Manager");
+const Engineer = require("./assets/Engineer");
+const Intern = require("./assets/Intern");
 
-//declare empty array to store all employees
-let allEmployees = [];
+const manager = new Manager;
+const engineer = new Engineer;
+const intern = new Intern;
 
-function myTeam() {
-function employeeManager() {
-  //questions for manager name, manager id, email, and office number
-  inquirer.prompt([
+const OUTPUT_DIR = path.resolve(__dirname, "output")
+const outputPath = path.join(OUTPUT_DIR, "team.html");
+
+const render = require("./assets/htmlRenderer");
+
+const allEmployees = [];
+const idArray = [];
+
+function appMenu() {
+
+  function createManager() {
+    console.log("Please build your team");
+    inquirer.prompt([
       {
         type: "input",
         name: "managerName",
-        message: "Please enter manager's name."
+        message: "What is your manager's name?"
       },
       {
         type: "input",
-        name: "managerID",
-        message: "Please enter nanager's ID."
+        name: "managerId",
+        message: "What is your manager's id?"
       },
       {
         type: "input",
         name: "managerEmail",
-        message: "Please enter manager's email."
+        message: "What is your manager's email?"
       },
       {
         type: "input",
         name: "managerOfficeNumber",
-        message: "Please enter manager's office number."
-      },
+        message: "What is your manager's office number?"
+      }
+    ]).then(function (data) {
+      const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerOfficeNumber);
+      allEmployees.push(manager);
+      idArray.push(data.managerId);
+      employeeRoles();
+    });
+  }
+
+  function employeeRoles() {
+
+    inquirer.prompt([
       {
         type: "list",
-        name: "employeeRole",
-        message: "What is the role of this team member?",
+        name: "memberChoice",
+        message: "Which type of team member would you like to add?",
         choices: [
           "Engineer",
           "Intern",
           "None"
-        ],
+        ]
       }
-    ])
-    .then((data) => {
-      //console.log(data);
-      //create a new Manager instance with the question's answers.
-      let managerData = new Manager(data.managerName, data.managerID, data.managerEmail, data.managerOfficeName);
-
-      switch (data.employeeRole) {
-        case "Engineer":
-          employeeEngineer();
-          break;
-        case "Intern":
-          employeeIntern();
-          break;
-        case "None":
-          noMoreEmployees();
-          break;
-        default:
-          noMoreEmployees();
+    ]).then(function (userChoice) {
+      switch(userChoice.memberChoice) {
+      case "Engineer":
+        addEngineer();
+        break;
+      case "Intern":
+        addIntern();
+        break;
+      default:
+        buildTeam();
       }
-
-      //save the newly created manager into the allEmployees array.
-      allEmployees.push(managerData);
     });
-}
+  }
 
-
-function employeeEngineer() {
-  //questions for engineer name, manager id, email, and office number
-  inquirer.prompt([
+  function addEngineer() {
+    inquirer.prompt([
       {
         type: "input",
         name: "engineerName",
-        message: "Please enter Engineer's name."
+        message: "What is your engineer's name?",
       },
       {
         type: "input",
         name: "engineerID",
-        message: "Please enter Engineer's ID."
+        message: "What is your engineer's id?"
       },
       {
         type: "input",
         name: "engineerEmail",
-        message: "Please enter Engineer's email.",
+        message: "What is your engineer's email?"
       },
       {
         type: "input",
-        name: "engineerGitHub",
-        message: "Please enter Engineer's Github username.",
-      },
-      {
-        type: "list",
-        name: "employeeRole",
-        message: "What is the role of this team member?",
-        choices: [
-          "Engineer",
-          "Intern",
-          "None"
-        ],
+        name: "engineerGithub",
+        message: "What is your engineer's GitHub username?"
       }
-    ])
-    .then((data) => {
-      //create a new Engineer instance with the question's answers.
-      let engineerData = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGitHub);
-
-      switch (data.employeeRole) {
-        case "Engineer":
-          employeeEngineer();
-          break;
-        case "Intern":
-          employeeIntern();
-          break;
-        case "None":
-          noMoreEmployees();
-          break;
-        default:
-          noMoreEmployees();
-      }
-
-      //save the newly created manager into the allEmployees array.
-      allEmployees.push(engineerData);
+    ]).then(function (data) {
+      const engineer = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGithub);
+      allEmployees.push(engineer);
+      idArray.push(data.engineerId);
+      employeeRoles();
     });
-}
+  }
 
-function employeeIntern() {
-  //questions for engineer name, manager id, email, and office number
-  inquirer.prompt([
+  function addIntern() {
+    inquirer.prompt([
       {
         type: "input",
         name: "internName",
-        message: "Please enter intern's name."
+        message: "What is your intern's name?",
       },
       {
         type: "input",
-        name: "internID",
-        message: "Please enter intern's ID."
+        name: "internId",
+        message: "What is your intern's id?"
       },
       {
         type: "input",
         name: "internEmail",
-        message: "Please enter intern's email.",
+        message: "What is your intern's email?"
       },
       {
         type: "input",
         name: "internSchool",
-        message: "Please enter intern's school username.",
-      },
-      {
-        type: "list",
-        name: "employeeRole",
-        message: "What is the role of this team member?",
-        choices: [
-          "Engineer",
-          "Intern",
-          "None"
-        ],
+        message: "What is your intern's school?",
       }
-    ])
-    .then((data) => {
-      //create a new intern instance with the question's answers.
-      let internData = new Intern(data.internName, data.internID, data.internEmail, data.internSchool);
-
-      switch (data.employeeRole) {
-        case "Engineer":
-          employeeEngineer();
-          break;
-        case "Intern":
-          employeeIntern();
-          break;
-        case "None":
-          noMoreEmployees();
-          break;
-        default:
-          noMoreEmployees();
-      }
-
-      //save the newly created manager into the allEmployees array.
-      allEmployees.push(internData);
+    ]).then(function (data) {
+      const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool);
+      allEmployees.push(intern);
+      idArray.push(data.internId);
+      employeeRoles();
     });
+  }
+
+  function buildTeam() {
+    //Add: "utf-8" to aviod this error:
+  //TypeError [ERR_INVALID_ARG_TYPE]: The "data" argument must be of type string or an instance of Buffer, TypedArray, or DataView.
+
+  //node:fs:505
+  //handleErrorFromBinding(ctx);
+  fs.writeFileSync(outputPath, render(allEmployees), "utf-8");
+  }
+
+  createManager();
 
 }
 
-function noMoreEmployees() {
-  return true;
-}
-employeeManager();
-}
 
-myTeam();
+appMenu();
