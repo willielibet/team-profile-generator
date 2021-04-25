@@ -10,7 +10,7 @@
   [Description](#description)  
   [Installation](#installation)  
   [Usage](#usage)  
-  [Video Demo](#video)  
+  [Demo](#demo)    
   [License](#license)  
   [Contribution](#contribution)  
   [Test](#test)  
@@ -18,7 +18,7 @@
 
   ## Description
 
-This is a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. It also provides a unit test for every part of the code and ensure that it passes each test.
+This is a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. This application generates a webpage that displays a team's basic info so that quick access to their emails and GitHub profiles is possible. It also provides a unit test for every part of the code and ensure that it passes each test.
 
 Because this application won’t be deployed, a link to a walkthrough video that demonstrates its functionality and all of the tests passing is also provided.
 
@@ -28,7 +28,7 @@ Because this application won’t be deployed, a link to a walkthrough video that
   ## Usage
   To generate a team profile.
 
-  ## Video Demo
+  ## Demo
   [Video Demo's Link](https://willielibet.github.io/team-profile-generator/)
 
   ## License
