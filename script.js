@@ -27,27 +27,26 @@ const idArray = [];
 function appMenu() {
 
   function createManager() {
-    console.log("Please build your team");
     inquirer.prompt([
       {
         type: "input",
         name: "managerName",
-        message: "What is your manager's name?"
+        message: "Please enter your team employee's name: "
       },
       {
         type: "input",
         name: "managerId",
-        message: "What is your manager's id?"
+        message: "Please enter your team manager's ID: "
       },
       {
         type: "input",
         name: "managerEmail",
-        message: "What is your manager's email?"
+        message: "Please enter your team manager's email: "
       },
       {
         type: "input",
         name: "managerOfficeNumber",
-        message: "What is your manager's office number?"
+        message: "Please enter your team manager's office number: "
       }
     ]).then(function (data) {
       const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerOfficeNumber);
@@ -89,22 +88,22 @@ function appMenu() {
       {
         type: "input",
         name: "engineerName",
-        message: "What is your engineer's name?",
+        message: "Please enter your team engineer's name: ",
       },
       {
         type: "input",
         name: "engineerID",
-        message: "What is your engineer's id?"
+        message: "Please enter your team engineer's ID: "
       },
       {
         type: "input",
         name: "engineerEmail",
-        message: "What is your engineer's email?"
+        message: "Please enter your team engineer's email: "
       },
       {
         type: "input",
         name: "engineerGithub",
-        message: "What is your engineer's GitHub username?"
+        message: "Please enter your team engineer's Github username: "
       }
     ]).then(function (data) {
       const engineer = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGithub);
@@ -119,22 +118,22 @@ function appMenu() {
       {
         type: "input",
         name: "internName",
-        message: "What is your intern's name?",
+        message: "Please enter your team intern's name: ",
       },
       {
         type: "input",
         name: "internId",
-        message: "What is your intern's id?"
+        message: "Please enter your intern's ID: "
       },
       {
         type: "input",
         name: "internEmail",
-        message: "What is your intern's email?"
+        message: "Please enter your team intern's email?"
       },
       {
         type: "input",
         name: "internSchool",
-        message: "What is your intern's school?",
+        message: "Please enter your intern's school username: ",
       }
     ]).then(function (data) {
       const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool);
@@ -145,7 +144,7 @@ function appMenu() {
   }
 
   function buildTeam() {
-    //Add: "utf-8" to aviod this error:
+  //Add: "utf-8" to aviod this error:
   //TypeError [ERR_INVALID_ARG_TYPE]: The "data" argument must be of type string or an instance of Buffer, TypedArray, or DataView.
 
   //node:fs:505
