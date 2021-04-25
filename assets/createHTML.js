@@ -12,15 +12,18 @@ const render = employees => {
     //and save them into the html array.
   .filter(function(employee) { 
     return (employee.getRole() === "Manager")
-  }).map(manager => renderManager(manager)).join("")
+  }).map(function(manager) { 
+    return renderManager(manager)}).join("") 
   );
+  
 
   html.push(employees
     //create a new array html with all elements that are equal to role Engineer
     //and save them into the html array.
   .filter(function(employee) { 
     return (employee.getRole() ===  "Engineer")
-  }).map(engineer => renderEngineer(engineer)).join("")
+  }).map(function(engineer) {
+    return renderEngineer(engineer)}).join("")
   );
 
   html.push(employees
@@ -28,7 +31,8 @@ const render = employees => {
     //and save them into the html array.
   .filter(function(employee) { 
     return (employee.getRole() ===  "Intern")
-  }).map(intern => renderIntern(intern)).join("")
+  }).map(function(intern) {
+    return renderIntern(intern)}).join("")
   );
 
   return renderMain(html.join(""));

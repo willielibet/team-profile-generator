@@ -16,10 +16,10 @@ const manager = new Manager;
 const engineer = new Engineer;
 const intern = new Intern;
 
-const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const OUTPUT_DIR = path.resolve(__dirname, "template_output")
+const outputPath = path.join(OUTPUT_DIR, "team_index.html");
 
-const render = require("./assets/htmlRenderer");
+const render = require("./assets/createHTML");
 
 const allEmployees = [];
 const idArray = [];
