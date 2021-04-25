@@ -8,8 +8,8 @@ const render = employees => {
   const htmlP = [];
 
   html.push(employees
-    //create a new array html with all elements that are equal to role Manager
-    //and save them into the html array.
+  //this creates a new array html with all elements that are equal to role Manager
+  //and save them into the html array.
   .filter(function(employee) { 
     return (employee.getRole() === "Manager")
   }).map(function(manager) { 
@@ -18,8 +18,8 @@ const render = employees => {
   
 
   html.push(employees
-    //create a new array html with all elements that are equal to role Engineer
-    //and save them into the html array.
+  //this creates a new array html with all elements that are equal to role Engineer
+  //and save them into the html array.
   .filter(function(employee) { 
     return (employee.getRole() ===  "Engineer")
   }).map(function(engineer) {
@@ -27,8 +27,8 @@ const render = employees => {
   );
 
   html.push(employees
-    //create a new array html with all elements that are equal to role Intern
-    //and save them into the html array.
+  //this creates a new array html with all elements that are equal to role Intern
+ //and save them into the html array.
   .filter(function(employee) { 
     return (employee.getRole() ===  "Intern")
   }).map(function(intern) {
@@ -39,8 +39,11 @@ const render = employees => {
 
 };
 
-const renderManager = manager => {
+//this function dynamically builds the html for manager.
+const renderManager = function(manager) {
   let template = fs.readFileSync(path.resolve(templatesDir, "manager.html"), "utf8");
+  //this replaces name, role, email, id, and officeNumber with their corresponding values as entered
+  //in by the user responses on the terminal.
   template = replacePlaceholders(template, "name", manager.getName());
   template = replacePlaceholders(template, "role", manager.getRole());
   template = replacePlaceholders(template, "email", manager.getEmail());
@@ -49,8 +52,11 @@ const renderManager = manager => {
   return template;
 };
 
-const renderEngineer = engineer => {
+//this function dynamically builds the html for engineer.
+const renderEngineer = function(engineer) {
   let template = fs.readFileSync(path.resolve(templatesDir, "engineer.html"), "utf8");
+  //this replaces name, role, email, id, and github with their corresponding values as entered
+  //in by the user responses on the terminal.
   template = replacePlaceholders(template, "name", engineer.getName());
   template = replacePlaceholders(template, "role", engineer.getRole());
   template = replacePlaceholders(template, "email", engineer.getEmail());
@@ -59,8 +65,12 @@ const renderEngineer = engineer => {
   return template;
 };
 
-const renderIntern = intern => {
+//this function dynamically builds the html for intern.
+const renderIntern = function(intern) {
+  //this creates the html.
   let template = fs.readFileSync(path.resolve(templatesDir, "intern.html"), "utf8");
+  //replace name, role, email, id, and school with their corresponding values as entered
+  //in by the user responses on the terminal.
   template = replacePlaceholders(template, "name", intern.getName());
   template = replacePlaceholders(template, "role", intern.getRole());
   template = replacePlaceholders(template, "email", intern.getEmail());
@@ -69,7 +79,7 @@ const renderIntern = intern => {
   return template;
 };
 
-const renderMain = html => {
+const renderMain = function(html) {
   const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
   return replacePlaceholders(template, "team", html);
 };

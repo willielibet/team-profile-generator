@@ -19,7 +19,7 @@ const intern = new Intern;
 const OUTPUT_DIR = path.resolve(__dirname, "template_output")
 const outputPath = path.join(OUTPUT_DIR, "team_index.html");
 
-const render = require("./assets/createHTML");
+const render = require("./assets/create_html");
 
 const allEmployees = [];
 const idArray = [];
